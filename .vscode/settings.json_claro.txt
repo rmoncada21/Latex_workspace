@@ -1,0 +1,253 @@
+{
+  "latex-workshop.latex.outDir": "%DIR%",
+  "latex-workshop.latex.tools": [
+  {
+    "name": "latexmk-aux-build",
+    "command": "latexmk",
+    "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "-pdf",
+      "-emulate-aux-dir",
+      "-auxdir=build",
+      "-outdir=.",
+      "%DOC%"
+    ],
+    "env": {}
+  }
+],"latex-workshop.view.outline.sections": [
+  "part", "chapter", "section", "subsection",
+  "subsubsection", "paragraph|subsubsubsection"
+],"latex-workshop.intellisense.command.user": {
+  "subsubsubsection{}": "subsubsubsection{$1}",
+  "subsubsubsection[]{}": "subsubsubsection[${2:corto}]{$1}",
+  "subsubsubsection*{}": "subsubsubsection*{$1}"
+},
+"latex-workshop.latex.recipes": [
+  {
+    "name": "PDF en raiz, aux en build",
+    "tools": ["latexmk-aux-build"]
+  }
+],
+  "latex-workshop.latex.verbatimEnvs": [
+  "verbatim", "Verbatim", "BVerbatim", "LVerbatim", "SaveVerbatim", "VerbatimOut",
+  "lstlisting", "minted", "comment", "alltt", "listing",
+  "codigoC", "codigoSV", "codigoBash", "codigoClat",
+  "codigoCterm", "codigoCterm2", "codigoCtermlnx",
+  "codigoCtab", "codigoCieee",
+  "codigoCmin", "codigoCcap", "codigoSVcap", "codigoBashcap", "codeBlockC","codeBlockC","codeBlockSV","codeBlockBash","codeBlockLat","codeBlockTab","codeBlockIeee","codeBlockTermROG","codeBlockTermGGG","codeBlockTermLinux","codeBlockMinC","codeBlockMinCcap","codeBlockMinSVcap","codeBlockMinBashcap"
+],
+  "latex-workshop.view.pdf.viewer": "external",
+  "latex-workshop.view.pdf.external.viewer.command": "okular",
+  "latex-workshop.view.pdf.external.viewer.args": [
+    "--unique",
+    "%PDF%"
+  ],
+  "latex-workshop.view.pdf.external.synctex.command": "okular",
+  "latex-workshop.view.pdf.external.synctex.args": [
+    "--unique",
+    "%PDF%#src:%LINE%%TEX%"
+  ],
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  // "latex-workshop.latex.watch.pdf.delay": 2000,
+  // "files.autoSave": "afterDelay",
+  // "files.autoSaveDelay": 1000,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 100,
+  "editor.rulers": [0],
+
+  "editor.minimap.enabled": true,
+  "editor.minimap.maxColumn": 70,
+  "editor.minimap.size": "fit",
+  "editor.minimap.scale": 1,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.showSlider": "always",
+
+  "editor.lineNumbers": "on",
+  "editor.glyphMargin": false,
+  "editor.folding": false,
+  "editor.lineDecorationsWidth": 4,
+
+  "editor.renderWhitespace": "selection",
+  "editor.cursorBlinking": "smooth",
+  "editor.occurrencesHighlight": "off",
+
+  "workbench.colorCustomizations": {
+    "editor.background": "#ffffff",
+    "editor.foreground": "#1a1a1a",
+    "editorLineNumber.foreground": "#768390",
+    "editorLineNumber.activeForeground": "#adbac7",
+    "editorGutter.background": "#2d333b",
+    "editor.lineHighlightBackground": "#f2f2f2",
+    "editorCursor.foreground": "#000000",
+    "editor.selectionBackground": "#cce8ff",
+    "editor.selectionHighlightBackground": "#f0f0f0",
+    "editor.wordHighlightBackground": "#f0f0f0",
+    "editor.wordHighlightStrongBackground": "#f0f0f0",
+    "editorIndentGuide.background": "#dddddd",
+    "editorIndentGuide.activeBackground": "#bbbbbb",
+
+    "breadcrumb.background": "#2d333b",
+    "breadcrumb.foreground": "#768390",
+    "breadcrumb.focusForeground": "#adbac7",
+    "breadcrumb.activeSelectionForeground": "#ffffff",
+    "breadcrumbPicker.background": "#2d333b",
+
+    "scrollbar.shadow": "#22272e",
+    "scrollbarSlider.background": "#2d333b88",
+    "scrollbarSlider.hoverBackground": "#2d333bcc",
+    "scrollbarSlider.activeBackground": "#2d333bff",
+
+    "minimap.background": "#2d333b",
+    "minimapSlider.background": "#adbac744",
+    "minimapSlider.hoverBackground": "#adbac766",
+    "minimapSlider.activeBackground": "#adbac788",
+    "minimap.foregroundOpacity": "#000000cc",
+
+    "editorWidget.background": "#ffffff",
+    "editorWidget.foreground": "#1a1a1a",
+    "editorWidget.border": "#cccccc",
+    "editorSuggestWidget.background": "#ffffff",
+    "editorSuggestWidget.foreground": "#1a1a1a",
+    "editorSuggestWidget.border": "#cccccc",
+    "editorSuggestWidget.selectedBackground": "#cce8ff",
+    "editorSuggestWidget.selectedForeground": "#1a1a1a",
+    "editorSuggestWidget.highlightForeground": "#0451a5",
+    "editorSuggestWidget.focusHighlightForeground": "#0451a5",
+    "editorHoverWidget.background": "#ffffff",
+    "editorHoverWidget.foreground": "#1a1a1a",
+    "editorHoverWidget.border": "#cccccc"
+  },
+
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          "support.function.be.latex",
+          "keyword.control.preamble.latex",
+          "storage.type.function.latex",
+          "support.function.section.latex",
+          "support.function.general.tex",
+          "support.function.general.latex",
+          "keyword.control.latex",
+          "entity.name.function.latex",
+          "punctuation.definition.function.latex",
+          "support.function.cite.latex",
+          "keyword.control.cite.latex",
+          "meta.function.cite.latex",
+          "support.function.ref.latex",
+          "keyword.control.ref.latex",
+          "support.function.label.latex",
+          "support.function.emph.latex",
+          "support.function.textit.latex",
+          "support.function.textbf.latex",
+          "support.function.texttt.latex",
+          "support.function.environment.general.latex",
+          "support.function.environment.list.latex",
+          "support.function.include.latex",
+          "support.function.input.latex",
+          "support.function.import.latex",
+          "keyword.control.import.latex",
+          "keyword.control.include.latex",
+          "keyword.control.input.include.latex",
+          "keyword.other.item.latex"
+        ],
+        "settings": {
+          "foreground": "#2e8b57",
+          "fontStyle": ""
+        }
+      },
+      {
+        "scope": [
+          "variable.parameter.function.latex",
+          "constant.other.reference.latex",
+          "support.class.latex",
+          "entity.name.section.latex",
+          "meta.group.braces.tex string"
+        ],
+        "settings": {
+          "foreground": "#a8aad4",
+          "fontStyle": ""
+        }
+      },
+      {
+        "scope": [
+          "punctuation.definition.group.tex",
+          "punctuation.definition.group.latex",
+          "punctuation.definition.arguments.begin.latex",
+          "punctuation.definition.arguments.end.latex",
+          "punctuation.definition.arguments.optional.begin.latex",
+          "punctuation.definition.arguments.optional.end.latex",
+          "punctuation.definition.group.brace.tex",
+          "punctuation.section.group.begin.tex",
+          "punctuation.section.group.end.tex",
+          "punctuation.definition.textbf.begin.latex",
+          "punctuation.definition.textbf.end.latex",
+          "punctuation.definition.textit.begin.latex",
+          "punctuation.definition.textit.end.latex",
+          "punctuation.definition.emph.begin.latex",
+          "punctuation.definition.emph.end.latex",
+          "punctuation.definition.cite.begin.latex",
+          "punctuation.definition.cite.end.latex",
+          "punctuation.definition.label.begin.latex",
+          "punctuation.definition.label.end.latex",
+          "punctuation.definition.section.begin.latex",
+          "punctuation.definition.section.end.latex",
+          "punctuation.definition.begin.latex",
+          "punctuation.definition.end.latex"
+        ],
+        "settings": {
+          "foreground": "#000000",
+          "fontStyle": ""
+        }
+      },
+      {
+        "scope": [
+          "comment.line.percentage.tex",
+          "comment.line.percentage.latex",
+          "punctuation.definition.comment.tex"
+        ],
+        "settings": {
+          "foreground": "#1750eb",
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": [
+          "markup.bold.textbf.latex"
+        ],
+        "settings": {
+          "foreground": "#000000",
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": [
+          "meta.function.section.subsubsection.latex entity.name.section.latex",
+          "meta.function.section.subsection.latex entity.name.section.latex",
+          "meta.function.section.section.latex entity.name.section.latex"
+        ],
+        "settings": {
+          "foreground": "#000000",
+          "fontStyle": ""
+        }
+      },
+      {
+        "scope": [
+          "meta.function.environment.list.latex variable.parameter.function.latex"
+        ],
+        "settings": {
+          "foreground": "#7a3fb3",
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+  "[latex]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "strings": true
+    }
+  }
+}

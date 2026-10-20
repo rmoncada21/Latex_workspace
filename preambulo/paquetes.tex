@@ -1,0 +1,77 @@
+% Language: LaTeX
+% =====================================================================================================
+%  paquetes.tex  --  SOLO carga de paquetes (sin configuracion)
+%  La configuracion vive en formato.tex / listings.tex / entornos.tex
+% =====================================================================================================
+
+% --- Codificacion e idioma ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+% --- Tipografia ---
+\usepackage{newtxtext,newtxmath}   % Times New Roman
+\usepackage{ragged2e}              % justificado fino
+\usepackage[normalem]{ulem}        % subrayado/tachado
+
+% --- Color (antes de listings y de cualquier \definecolor) ---
+\usepackage{xcolor}
+
+% --- Geometria y espaciado (la CONFIG va en formato.tex) ---
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{lscape}                % paginas apaisadas
+
+% --- Estructura, titulos, indices ---
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tocbibind}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+
+% --- Tablas ---
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{pbox}
+
+% --- Graficos y codigo fuente ---
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{verbatim}
+\usepackage{listings}
+
+% --- Matematicas ---
+\usepackage{amsmath}
+\let\Bbbk\relax                    % evita choque amssymb <-> newtxmath
+\usepackage{amssymb}
+\usepackage{bytefield}
+
+% --- Cajas (tcolorbox) ---
+% [most] no carga 'listings' con seguridad -> la pedimos explicita.
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{listings,skins,breakable}
+
+% --- Posicionamiento flotantes ---
+\usepackage{float}                 % entorno [H]
+\usepackage{newfloat}              % entornos flotantes propios (float "codigo")
+
+% --- Enlaces: hyperref va casi al final ---
+\usepackage[colorlinks=true, linkcolor=black, citecolor=blue]{hyperref}
+\usepackage{url}
+\usepackage{doi}                   % despues de hyperref
+
+% --- Acronimos
+\usepackage{acro}
+
+% --- Etiquetas personalizadas TODO's
+\usepackage{todonotes}
+% comandos personalizados con colores
+\newcommand{\TODO}[1]{\todo[color=green!40,inline]{TODO: #1}}
+\newcommand{\REMOVE}[1]{\todo[color=red!40,inline]{REMOVE: #1}}
+\newcommand{\REVIEW}[1]{\todo[color=yellow!40,inline]{REVIEW: #1}}
+
+
+
+% \usepackage{hypcap}

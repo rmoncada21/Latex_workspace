@@ -1,0 +1,141 @@
+% Language: LaTeX
+% =====================================================================================================
+%  formato.tex  --  Configuracion de apariencia del documento
+%  (margenes, espaciado, titulos, encabezados, indices)
+% =====================================================================================================
+
+% --- Margenes ---
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=3.5cm, bottom=3.5cm}
+
+% --- Interlineado ---
+\onehalfspacing
+
+% --- Profundidad de numeracion / indice (subsubsections) ---
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\counterwithin{table}{section}
+\counterwithin{figure}{section}
+
+% --- Titulo (caption) ARRIBA en tablas ---
+% 'plaintop' coloca el caption sobre el cuerpo del flotante sin importar
+% donde este escrito el \caption en el fuente. Requiere 'float' (paquetes.tex).
+\floatstyle{plaintop}
+\restylefloat{table}
+\floatstyle{plain}                 % restaura el estilo por defecto para lo demas
+% \captionsetup[table]{position=top, skip=6pt}
+\captionsetup[table]{position=top, skip=6pt, labelsep=period}
+\captionsetup[figure]{labelsep=period}
+
+% --- Titulos: SECTION ---
+\titleformat{\section}
+  {\normalfont\bfseries\large}{\thesection}{1em}{\MakeUppercase}
+\titlespacing*{\section}{0pt}{6pt}{18pt}
+\newcommand{\sectionbreak}{\clearpage}   % cada seccion en pagina nueva
+
+% --- Titulos: SUBSECTION ---
+\titleformat{\subsection}
+  {\normalfont\bfseries\normalsize}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{6pt}{18pt}
+
+% --- Titulos: SUBSUBSECTION ---
+\titleformat{\subsubsection}
+  {\normalfont\bfseries\normalsize}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{6pt}{18pt}
+
+% --- Titulos: PARAGRAPH (4to nivel, actua como subsubsubsection) ---
+% titleformat con forma [hang] (default) lo convierte de run-in a titulo de bloque
+\titleformat{\paragraph}
+  {\normalfont\bfseries\normalsize}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{6pt}{18pt}
+% --- Alias: nomenclatura consistente con la jerarquia de secciones ---
+\newcommand{\subsubsubsection}{\paragraph}
+
+% --- Resumen / Abstract (seccion sin numero, centrada) ---
+\titleformat{name=\section,numberless}[block]
+  {\normalfont\bfseries\normalsize\centering}{}{0pt}{}
+
+% --- Renombrar indices en espanol ---
+% \addto\captionsspanish{
+%   \renewcommand{\contentsname}{Indice General}
+%   \renewcommand{\listfigurename}{Indice de Imagenes}
+%   \renewcommand{\listtablename}{Indice de Figuras}
+%   \renewcommand{\tablename}{Tabla}
+%   \renewcommand{\refname}{Referencias Bibliograficas}
+% }
+
+\addto\captionsspanish{
+  \renewcommand{\contentsname}{Índice General}
+  \renewcommand{\listtablename}{Índice de Tablas}
+  \renewcommand{\listfigurename}{Índice de Figuras}
+  \renewcommand{\tablename}{Tabla}
+  \renewcommand{\figurename}{Figura}
+  \renewcommand{\refname}{Referencias Bibliográficas}
+}
+
+% --- Encabezados y pies (fancyhdr) ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paginas preliminares en numeracion romana minuscula
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[R]{\thepage}
+  \renewcommand{\thepage}{\roman{page}}
+}
+% Portada de grupo para Apendices / Anexos (titulo VISIBLE + entrada en indice)
+\newcommand{\grupoapendices}[1]{%
+  \clearpage              % empieza en pagina nueva
+  \phantomsection         % ancla correcta para el hipervinculo del TOC (hyperref)
+  \section*{#1}%          % titulo VISIBLE en la pagina (no numerado)
+  \addcontentsline{toc}{section}{#1}%   % entrada en el indice
+}
+
+% --- Figura a pagina completa (recupera margen superior/inferior) ---
+% Uso: \begin{figuracompleta}[top=1cm, bottom=1.5cm] ... \end{figuracompleta}
+% Ocupa una pagina propia; los margenes se restauran al salir.
+% \newenvironment{figuracompleta}[1][top=1.5cm, bottom=1.5cm]{%
+%   \clearpage
+%   \newgeometry{left=2.5cm, right=2.5cm, #1}%
+%   \thispagestyle{fancy}%  numero de pagina visible; usar empty para quitarlo
+%   \noindent
+%   \begin{minipage}{\linewidth}
+%   \centering
+% }{%
+%   \end{minipage}
+%   \clearpage
+%   \restoregeometry
+% }
+
+
+
+% \newenvironment{figuracompleta}[1][top=1.5cm, bottom=1.5cm]{%
+%   \clearpage
+%   \newgeometry{left=2.5cm, right=2.5cm, #1}%
+%   \thispagestyle{fancy}%  numero de pagina visible; usar empty para quitarlo
+%   \noindent
+%   \begin{minipage}{\linewidth}
+%   \captionsetup{type=figure}%
+%   \centering
+% }{%
+%   \end{minipage}
+%   \clearpage
+%   \restoregeometry
+% }
+
+\newenvironment{figuracompleta}[1][top=1.5cm, bottom=1.5cm]{%
+  \clearpage
+  \newgeometry{left=2.5cm, right=2.5cm, #1}%
+  \thispagestyle{fancy}%  numero de pagina visible; usar empty para quitarlo
+  \noindent
+  \begin{minipage}{\linewidth}
+  \captionsetup{type=figure}%
+  \centering
+}{%
+  \end{minipage}
+  \clearpage
+  \aftergroup\restoregeometry
+}

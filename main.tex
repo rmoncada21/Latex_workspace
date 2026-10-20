@@ -1,0 +1,41 @@
+\documentclass[a4paper,12pt]{article}
+
+% ===== Preambulo modular =====
+\input{preambulo/paquetes}   % carga de paquetes
+\input{preambulo/formato}    % margenes, titulos, encabezados, indices
+\input{preambulo/listings}   % estilos de codigo (anterior + nuevo)
+\input{preambulo/entornos}   % cajas propias (notaieee, ...)
+\input{preambulo/acronimos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inicio del documento 
+%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\include{secciones/0_preludio/0-preludio}
+
+\include{secciones/1_introduccion/0-introduccion}
+\ac{uvm} % acronimo
+\cite{AGREGAR_CLAVE_Articulo}  % citas
+
+\include{secciones/2_marco_teorico/0-marco_teorico}
+
+\include{secciones/3_solucion/0-solucion}
+
+\include{secciones/4_resultados_analisis/0-resultados_analisis}
+
+\include{secciones/5_conclusiones/0-conclusiones}
+
+% Referencias Bibliográficas
+\bibliographystyle{IEEEtran}
+\bibliography{bibliografia/referencias}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Otros: Apéndices - Anexos
+%%%%%%%%%%%%%%%%%%%%
+
+% material elaborado por el propio autor
+\appendix
+\include{secciones/6_apendices/0-apendices}
+
+% \include{secciones/z_anexos_otros/0-anexos}
+
+\end{document}

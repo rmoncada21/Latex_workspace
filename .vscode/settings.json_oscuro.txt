@@ -1,0 +1,230 @@
+{
+  "latex-workshop.latex.outDir": "%DIR%",
+  "latex-workshop.latex.tools": [
+  {
+    "name": "latexmk-aux-build",
+    "command": "latexmk",
+    "args": [
+      "-synctex=1",
+      "-interaction=nonstopmode",
+      "-file-line-error",
+      "-pdf",
+      "-emulate-aux-dir",
+      "-auxdir=build",
+      "-outdir=.",
+      "%DOC%"
+    ],
+    "env": {}
+  }
+],"latex-workshop.view.outline.sections": [
+  "part", "chapter", "section", "subsection",
+  "subsubsection", "paragraph|subsubsubsection"
+],"latex-workshop.intellisense.command.user": {
+  "subsubsubsection{}": "subsubsubsection{$1}",
+  "subsubsubsection[]{}": "subsubsubsection[${2:corto}]{$1}",
+  "subsubsubsection*{}": "subsubsubsection*{$1}"
+},
+"latex-workshop.latex.recipes": [
+  {
+    "name": "PDF en raiz, aux en build",
+    "tools": ["latexmk-aux-build"]
+  }
+],
+  "latex-workshop.latex.verbatimEnvs": [
+  "verbatim", "Verbatim", "BVerbatim", "LVerbatim", "SaveVerbatim", "VerbatimOut",
+  "lstlisting", "minted", "comment", "alltt", "listing",
+  "codigoC", "codigoSV", "codigoBash", "codigoClat",
+  "codigoCterm", "codigoCterm2", "codigoCtermlnx",
+  "codigoCtab", "codigoCieee",
+  "codigoCmin", "codigoCcap", "codigoSVcap", "codigoBashcap", "codeBlockC","codeBlockC","codeBlockSV","codeBlockBash","codeBlockLat","codeBlockTab","codeBlockIeee","codeBlockTermROG","codeBlockTermGGG","codeBlockTermLinux","codeBlockMinC","codeBlockMinCcap","codeBlockMinSVcap","codeBlockMinBashcap"
+],
+  "latex-workshop.view.pdf.viewer": "external",
+  "latex-workshop.view.pdf.external.viewer.command": "okular",
+  "latex-workshop.view.pdf.external.viewer.args": [
+    "--unique",
+    "%PDF%"
+  ],
+  "latex-workshop.view.pdf.external.synctex.command": "okular",
+  "latex-workshop.view.pdf.external.synctex.args": [
+    "--unique",
+    "%PDF%#src:%LINE%%TEX%"
+  ],
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  // "latex-workshop.latex.watch.pdf.delay": 2000,
+  // "files.autoSave": "afterDelay",
+  // "files.autoSaveDelay": 1000,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 100,
+  "editor.rulers": [0],
+
+  "editor.minimap.enabled": true,
+  "editor.minimap.maxColumn": 70,
+  "editor.minimap.size": "fit",
+  "editor.minimap.scale": 1,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.showSlider": "always",
+
+  "editor.lineNumbers": "on",
+  "editor.glyphMargin": false,
+  "editor.folding": false,
+  "editor.lineDecorationsWidth": 4,
+
+  "editor.renderWhitespace": "selection",
+  "editor.cursorBlinking": "smooth",
+  "editor.occurrencesHighlight": "off",
+
+  "workbench.colorCustomizations": {
+  "[Default Light Modern]": {
+    // ← aquí pegas TODO lo que tenías antes en colorCustomizations
+  },
+  "[Default Dark Modern]": {
+    "editor.background": "#22272e",
+    "editor.foreground": "#adbac7",
+    "editorLineNumber.foreground": "#636e7b",
+    "editorLineNumber.activeForeground": "#adbac7",
+    "editorGutter.background": "#22272e",
+    "editor.lineHighlightBackground": "#2d333b",
+    "editorCursor.foreground": "#adbac7",
+    "editor.selectionBackground": "#264f78",
+    "editor.selectionHighlightBackground": "#2d333b",
+    "editor.wordHighlightBackground": "#2d333b",
+    "editor.wordHighlightStrongBackground": "#373e47",
+    "editorIndentGuide.background": "#373e47",
+    "editorIndentGuide.activeBackground": "#545d68",
+    "breadcrumb.background": "#22272e",
+    "breadcrumb.foreground": "#768390",
+    "breadcrumb.focusForeground": "#adbac7",
+    "minimap.background": "#22272e",
+    "editorWidget.background": "#2d333b",
+    "editorWidget.foreground": "#adbac7",
+    "editorWidget.border": "#444c56",
+    "editorSuggestWidget.background": "#2d333b",
+    "editorSuggestWidget.foreground": "#adbac7",
+    "editorSuggestWidget.border": "#444c56",
+    "editorSuggestWidget.selectedBackground": "#373e47",
+    "editorSuggestWidget.highlightForeground": "#6cb6ff",
+    "editorHoverWidget.background": "#2d333b",
+    "editorHoverWidget.foreground": "#adbac7",
+    "editorHoverWidget.border": "#444c56"
+  }
+},
+"editor.tokenColorCustomizations": {
+  "[Default Light Modern]": {
+    "textMateRules": [ /* ← tus reglas actuales, sin cambios */ ]
+  },
+  "[Default Dark Modern]": {
+    "textMateRules": [
+      { "scope": ["support.function", "keyword.control", "keyword.other.item",
+                  "storage.type.function", "entity.name.function",
+                  "punctuation.definition.function"],
+        "settings": { "foreground": "#57ab5a", "fontStyle": "" } },
+      { "scope": ["variable.parameter.function.latex", "constant.other.reference.latex",
+                  "support.class.latex", "entity.name.section.latex",
+                  "meta.group.braces.tex string"],
+        "settings": { "foreground": "#a8aad4", "fontStyle": "" } },
+      { "scope": ["punctuation.definition", "punctuation.section.group"],
+        "settings": { "foreground": "#adbac7", "fontStyle": "" } },
+      { "scope": ["comment.line.percentage", "punctuation.definition.comment"],
+        "settings": { "foreground": "#539bf5", "fontStyle": "italic" } },
+      { "scope": ["markup.bold.textbf.latex"],
+        "settings": { "foreground": "#cdd9e5", "fontStyle": "bold" } },
+      { "scope": ["meta.function.section entity.name.section.latex"],
+        "settings": { "foreground": "#cdd9e5", "fontStyle": "" } },
+      { "scope": ["meta.function.environment.list.latex variable.parameter.function.latex"],
+        "settings": { "foreground": "#b083f0", "fontStyle": "" } }
+    ]
+  }
+},
+      {
+        "scope": [
+          "variable.parameter.function.latex",
+          "constant.other.reference.latex",
+          "support.class.latex",
+          "entity.name.section.latex",
+          "meta.group.braces.tex string"
+        ],
+        "settings": {
+          "foreground": "#a8aad4",
+          "fontStyle": ""
+        }
+      },
+      {
+        "scope": [
+          "punctuation.definition.group.tex",
+          "punctuation.definition.group.latex",
+          "punctuation.definition.arguments.begin.latex",
+          "punctuation.definition.arguments.end.latex",
+          "punctuation.definition.arguments.optional.begin.latex",
+          "punctuation.definition.arguments.optional.end.latex",
+          "punctuation.definition.group.brace.tex",
+          "punctuation.section.group.begin.tex",
+          "punctuation.section.group.end.tex",
+          "punctuation.definition.textbf.begin.latex",
+          "punctuation.definition.textbf.end.latex",
+          "punctuation.definition.textit.begin.latex",
+          "punctuation.definition.textit.end.latex",
+          "punctuation.definition.emph.begin.latex",
+          "punctuation.definition.emph.end.latex",
+          "punctuation.definition.cite.begin.latex",
+          "punctuation.definition.cite.end.latex",
+          "punctuation.definition.label.begin.latex",
+          "punctuation.definition.label.end.latex",
+          "punctuation.definition.section.begin.latex",
+          "punctuation.definition.section.end.latex",
+          "punctuation.definition.begin.latex",
+          "punctuation.definition.end.latex"
+        ],
+        "settings": {
+          "foreground": "#000000",
+          "fontStyle": ""
+        }
+      },
+      {
+        "scope": [
+          "comment.line.percentage.tex",
+          "comment.line.percentage.latex",
+          "punctuation.definition.comment.tex"
+        ],
+        "settings": {
+          "foreground": "#1750eb",
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": [
+          "markup.bold.textbf.latex"
+        ],
+        "settings": {
+          "foreground": "#000000",
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": [
+          "meta.function.section.subsubsection.latex entity.name.section.latex",
+          "meta.function.section.subsection.latex entity.name.section.latex",
+          "meta.function.section.section.latex entity.name.section.latex"
+        ],
+        "settings": {
+          "foreground": "#000000",
+          "fontStyle": ""
+        }
+      },
+      {
+        "scope": [
+          "meta.function.environment.list.latex variable.parameter.function.latex"
+        ],
+        "settings": {
+          "foreground": "#7a3fb3",
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+  "[latex]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "strings": true
+    }
+  }
+}

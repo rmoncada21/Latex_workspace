@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Capitulo 0 - Preludio
+%%%%%%%%%%%%%%%%%%%%
+
+	% Inclusión de la portada
+	\input{secciones/0_preludio/portada}
+	
+	% Para numeración romana desde la Hoja de Aprobación hasta el Índice de Figuras
+	\clearpage
+	\pagenumbering{roman}
+	\setcounter{page}{2} % Iniciar en ii
+	\renewcommand{\thepage}{\roman{page}}
+
+    % Declaratoria de autenticidad
+	\pagestyle{plain}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% \input{secciones/0_preludio/declaratoria_de_autenticidad}
+
+	\thispagestyle{plain} % Asegurarse de que la hoja de aprobación tenga número de página
+
+	% Hoja de aprobación
+	\pagestyle{plain}
+    \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% \input{secciones/0_preludio/hoja_aprobacion}
+
+	\thispagestyle{plain} % Asegurarse de que la hoja de aprobación tenga número de página
+	
+	% Declaración de conformidad
+	\pagestyle{plain}
+    \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% \input{secciones/0_preludio/declaracion_conformidad}
+	\thispagestyle{plain} % Asegurarse de que la página tenga número de página
+
+
+
+	% Índice General (excluido del TOC)
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+	\tableofcontents
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{4}}
+	\newpage
+	
+	% Índice de Tablas (excluido del TOC)
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+	\listoftables
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{4}}
+	\newpage
+	
+	% Índice de Figuras (excluido del TOC)
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+	\listoffigures
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{4}}
+	\newpage
+	
+	% Resumen/ Abstract
+	\pagestyle{plain}
+	\input{secciones/0_preludio/resumen}
+	\thispagestyle{plain}
+	\newpage
+	
+	% Cambio a numeración arábiga
+	\pagenumbering{arabic}
+	\fancyfoot[R]{\thepage} % Número de página en la esquina inferior derecha
+	
+	% Justificar el contenido
+	\justifying
+	
+	% Eliminar la sangria en los parrafos
+	\setlength{\parindent}{0.5cm}
+	
+	% Espaciado entre párrafos de 6 puntos
+	\setlength{\parskip}{6pt}

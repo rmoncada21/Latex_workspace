@@ -1,0 +1,29 @@
+% Language: LaTeX
+% =====================================================================================================
+%  entornos.tex  --  Cajas/entornos propios del documento
+%  Requiere: tcolorbox, caption, newfloat (paquetes.tex) e 'ieeeblue' (listings.tex)
+% =====================================================================================================
+\definecolor{ieeebluebg}{HTML}{EAF1F8}   % fondo claro de la nota IEEE
+
+% --- Float "nota" (estilo figure/table; numeracion "Nota X.Y" + indice) ---
+%   \caption dentro numera; \label dentro lo detecta el autocompletado.
+%   Indice (opcional):  \listofnota
+\DeclareFloatingEnvironment[
+  fileext=lonota, listname={Índice de Notas},
+  name=Nota, placement=H, within=section]{nota}
+\captionsetup[nota]{labelsep=period, font=small, format=hang}
+
+% De querer mantener una nomenclatura de numeros corridos 1..n
+% \DeclareFloatingEnvironment[
+%   fileext=lonota, listname={Índice de Notas},
+%   name=Nota, placement=H]{nota}
+
+% --- Caja de nota IEEE (solo diseno; el caption/label van en el float 'nota') ---
+%   Uso simple (sin numerar):   \begin{notaieee}{Titulo} ... \end{notaieee}
+%   Uso numerado/referenciable: dentro de \begin{nota} ... \caption{} \label{} \end{nota}
+\newtcolorbox{notaieee}[1]{
+  enhanced, colback=ieeebluebg, colframe=ieeeblue,
+  coltitle=white, colbacktitle=ieeeblue, fonttitle=\bfseries,
+  title=#1, boxrule=0.6pt, arc=1.5mm,
+  left=2.5mm, right=2.5mm, top=1.2mm, bottom=1.2mm
+}

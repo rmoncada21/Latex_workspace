@@ -1,0 +1,248 @@
+% Language: LaTeX
+% =======================  CON BARRA DE TITULO
+%   Estandar (1 argumento {texto barra}):
+%   codeBlockC         barra oscura, syntax C
+%   codeBlockSV        barra oscura, syntax SystemVerilog
+%   codeBlockBash      barra oscura, syntax bash
+% =======================  Esteticas ([estilo opcional]{texto barra}; por defecto C):
+%   codeBlockLat       franja azul lateral + titulo azul (callout)
+% # codeBlockTab       pestana oscura arriba-izquierda
+%   codeBlockIeee      barra azul IEEE
+%   codeBlockTermROG   terminal oscuro + circulos macOS (rojo/naranja/verde)
+% # codeBlockTermGGG   terminal oscuro + tres circulos verdes
+% * codeBlockTermLinux terminal oscuro + boton [+] de GNOME/Linux
+%     -> estilos fondo CLARO  (Clat/Ctab/Cieee):       caja_c | caja_sv | caja_bash
+%     -> estilos fondo OSCURO (Cterm/Cterm2/Ctermlnx): caja_c_dark | caja_sv_dark | caja_bash_dark
+% =======================  SIN BARRA
+%   codeBlockMinC      marco fino sobre blanco; [estilo opcional] (def. caja_c)
+%   codeBlockMinCcap      marco sobre fondo gris, syntax C
+%   codeBlockMinSVcap     marco sobre fondo gris, syntax SystemVerilog
+%   codeBlockMinBashcap   marco sobre fondo gris, syntax bash
+
+% ===================================================================================================== Ejemplo generico
+% --- codeBlockTermROG ---  (terminal; aqui en bash con [caja_bash_dark])
+% \begin{codigo}
+% \begin{TermROGcode}[caja_LENGUAJE_dark]{TITULO}
+% CODIGO
+% \end{TermROGcode}
+% \caption{Ejemplo con codeBlockTermROG.}
+% \label{lst:ej-term}
+% \end{codigo}
+% =====================================================================================================
+% * -> presenta problemas de render
+% # -> en uso
+
+% =====================================================================================================
+%  listings.tex  --  Estilos de codigo fuente
+%  Requiere: xcolor, listings, tcolorbox, caption, newfloat (paquetes.tex)
+%  Define 'ieeeblue' (compartido); entornos.tex tambien lo usa.
+% =====================================================================================================
+
+% --- Colores generales (compartidos por varios formatos) ---
+\definecolor{ieeeblue}{HTML}{1F4E79}     % keyword azul (compartido con notaieee)
+\definecolor{comentario}{HTML}{5B8A5B}   % comentarios verdes
+\definecolor{barra}{HTML}{3A3F44}        % barra de titulo oscura
+\definecolor{fondocodigo}{HTML}{F7F7F7}  % cuerpo del codigo
+\definecolor{marco}{HTML}{C9CCD1}        % borde sutil
+\definecolor{coltitulo}{HTML}{F4F4F4}    % texto de la barra
+
+
+% =====================================================================================================
+%  FLOAT "codigo"  (estilo figure/table; UN solo contador e indice)
+%  - \caption dentro del entorno numera "Codigo X.Y."
+%  - \label dentro del entorno SI lo detecta el autocompletado
+%  - Indice:  \listofcodigo
+%  within=section -> "seccion.n"; cambia a 'chapter' en report/book.
+% =====================================================================================================
+\DeclareFloatingEnvironment[
+  fileext=locodigo, listname={Índice de Códigos},
+  name=Código, placement=H, within=section]{codigo}
+\captionsetup[codigo]{labelsep=period, font=small, format=hang}
+
+
+% =====================================================================================================
+%  FORMATO ANTERIOR  (independiente; numeracion nativa de 'listings')
+%  Uso:  \begin{lstlisting}[style=codigo, language=C, caption=..., label=...]
+% =====================================================================================================
+\lstdefinestyle{codigo}{
+  basicstyle=\ttfamily\footnotesize, keywordstyle=\color{ieeeblue}\bfseries,
+  commentstyle=\color{gray}\itshape, stringstyle=\color{teal!70!black},
+  numbers=left, numberstyle=\tiny\color{gray!70}, numbersep=7pt,
+  frame=single, rulecolor=\color{gray!40}, backgroundcolor=\color{gray!4},
+  breaklines=true, showstringspaces=false, tabsize=2, captionpos=b,
+  xleftmargin=10pt, framexleftmargin=10pt}
+\lstdefinestyle{codigo_sv}{style=codigo, language=Verilog,
+  morekeywords={
+    import,byte,unsigned,logic,bit,void,automatic,function
+    }
+    }
+
+
+% =====================================================================================================
+%  ESTILOS DE LISTING (sintaxis)  --  compartidos por todas las cajas nuevas
+%  Fondo CLARO:  caja_c | caja_sv | caja_bash
+%  Fondo OSCURO: caja_c_dark | caja_sv_dark | caja_bash_dark  (terminal)
+% =====================================================================================================
+\lstdefinestyle{caja_base}{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{ieeeblue}\bfseries,
+  commentstyle=\color{comentario}\itshape,
+  stringstyle=\color{teal!70!black},
+  numbers=none, frame=none,
+  breaklines=true, breakautoindent=false, breakindent=0pt,
+  showstringspaces=false, tabsize=2,
+  columns=fullflexible, keepspaces=true,
+}
+\lstdefinestyle{caja_c}{style=caja_base, language=C}
+\lstdefinestyle{caja_sv}{style=caja_base, language=Verilog,
+  morekeywords={
+    import,byte,unsigned,logic,bit,void,automatic,function
+    }
+    }
+\lstdefinestyle{caja_bash}{style=caja_base, language=Bash,
+  morecomment=[l]{\#},
+  morekeywords={
+    if,then,else,elif,fi,for,while,until,do,done,case,esac,in,select,function,break,continue,return,exit,local,export,readonly,unset,source,eval,exec,trap,shift,test,true,false,time,echo,printf,read,cat,tac,head,tail,less,more,grep,egrep,fgrep,sed,awk,cut,paste,sort,uniq,find,xargs,which,whereis,ls,cp,mv,rm,mkdir,rmdir,chmod,chown,ln,touch,pwd,cd,pushd,popd,dirs,tar,gzip,gunzip,zip,unzip,diff,cmp,patch,make,cmake,ninja,gcc,g++,clang,clang++,vcs,iverilog,verilator,vsim,xrun,python,python3,pip,pip3,perl,ruby,node,npm,yarn,git,pull,push,clone,commit,checkout,merge,rebase,fetch,status,branch,tag,curl,wget,ssh,scp,rsync,sudo,su,env,envsubst,sleep,wait,kill,killall,basename,dirname,realpath,seq,expr,yes,eq,ne,lt,le,gt,ge,script
+},
+  morestring=[b]", morestring=[b]'}
+
+
+% =====================================================================================================
+%  CAJAS DE DISENO  (solo dibujan la caja; el caption/label van en el float)
+%  CON barra -> argumentos:  [estilo de listing]{texto de la barra}
+%               el estilo es OPCIONAL (por defecto C); ver tabla de estilos arriba
+% =====================================================================================================
+
+% --- Estandar: barra oscura -> codeBlockC | codeBlockSV | codeBlockBash ---
+\tcbset{estilocaja/.style={
+  enhanced, breakable, listing only,
+  colback=fondocodigo, colbacktitle=barra, coltitle=coltitulo,
+  colframe=marco, boxrule=0.6pt,
+  arc=3pt, outer arc=3pt, titlerule=0pt,
+  toptitle=2.5pt, bottomtitle=2.5pt, lefttitle=10pt,
+  top=5pt, bottom=5pt, left=8pt, right=8pt, boxsep=0pt,
+  fonttitle=\normalfont\small, coltext=black}}
+\newtcblisting{Ccode}[1]{estilocaja, listing style=caja_c,    title={#1}}
+\newtcblisting{SVcode}[1]{estilocaja, listing style=caja_sv,  title={#1}}
+\newtcblisting{Bashcode}[1]{estilocaja, listing style=caja_bash, title={#1}}
+
+% --- V1: Barra lateral / callout -> codeBlockLat ([estilo]{barra}) ---
+\tcbset{caja_lateral/.style={
+  enhanced, breakable, listing only,
+  colback=fondocodigo, coltext=black,
+  colframe=fondocodigo, boxrule=0pt, sharp corners,
+  borderline west={3pt}{0pt}{ieeeblue},
+  colbacktitle=fondocodigo, coltitle=ieeeblue, titlerule=0pt,
+  toptitle=4pt, bottomtitle=0pt, lefttitle=12pt,
+  top=2pt, bottom=4pt, left=12pt, right=8pt, boxsep=0pt,
+  fonttitle=\normalfont\small\bfseries}}
+\newtcblisting{Latcode}[2][caja_c]{caja_lateral, listing style=#1, title={#2}}
+
+% --- V2: Terminales oscuros -> codeBlockTermROG | codeBlockTermGGG | codeBlockTermLinux ---
+%   Comparten estilos de listing oscuros: caja_c_dark (def.) | caja_sv_dark | caja_bash_dark
+%   y la base 'caja_terminal_base'. Difieren SOLO en los botones de la barra (overlay).
+\definecolor{termbg}{HTML}{282C34}
+\definecolor{termfg}{HTML}{ABB2BF}
+\definecolor{termkw}{HTML}{61AFEF}
+\definecolor{termcm}{HTML}{7F848E}
+\definecolor{termst}{HTML}{98C379}
+\lstdefinestyle{caja_c_dark}{
+  basicstyle=\ttfamily\footnotesize\color{termfg},
+  keywordstyle=\color{termkw}\bfseries, commentstyle=\color{termcm}\itshape,
+  stringstyle=\color{termst}, identifierstyle=\color{termfg},
+  language=C, numbers=none, frame=none,
+  breaklines=true, showstringspaces=false, tabsize=2,
+  columns=fullflexible, keepspaces=true}
+\lstdefinestyle{caja_sv_dark}{style=caja_c_dark, language=Verilog,
+  morekeywords={
+    import,byte,unsigned,logic,bit,void,automatic,function
+    }
+    }
+\lstdefinestyle{caja_bash_dark}{style=caja_c_dark, language=bash,
+  morecomment=[l]{\#},
+  morekeywords={
+    if,then,else,elif,fi,for,while,until,do,done,case,esac,in,select,function,break,continue,return,exit,local,export,readonly,unset,source,eval,exec,trap,shift,test,true,false,time,echo,printf,read,cat,tac,head,tail,less,more,grep,egrep,fgrep,sed,awk,cut,paste,sort,uniq,find,xargs,which,whereis,ls,cp,mv,rm,mkdir,rmdir,chmod,chown,ln,touch,pwd,cd,pushd,popd,dirs,tar,gzip,gunzip,zip,unzip,diff,cmp,patch,make,cmake,ninja,gcc,g++,clang,clang++,vcs,iverilog,verilator,vsim,xrun,python,python3,pip,pip3,perl,ruby,node,npm,yarn,git,pull,push,clone,commit,checkout,merge,rebase,fetch,status,branch,tag,curl,wget,ssh,scp,rsync,sudo,su,env,envsubst,sleep,wait,kill,killall,basename,dirname,realpath,seq,expr,yes,eq,ne,lt,le,gt,ge,script
+    if,then,else,elif,fi,for,while,do,done,echo,rm,cd,git,make,source,exit,code,
+    % otros
+    testfloat_gen, testfloat_ver, level, seed
+    }
+  }
+% Apariencia comun. coltext/colupper=termfg EVITA texto negro: los identificadores,
+% numeros y signos de puntuacion NO toman el color de basicstyle, sino el del entorno.
+\tcbset{caja_terminal_base/.style={
+  enhanced, unbreakable, listing only,
+  colback=termbg, colframe=termbg, boxrule=0pt,
+  before upper={\color{termfg}},   % <-- en lugar de: coltext=termfg, colupper=termfg
+  colbacktitle=black!88, coltitle=termfg,
+  arc=5pt, outer arc=5pt, titlerule=0pt,
+  toptitle=3pt, bottomtitle=3pt, halign title=center,
+  top=5pt, bottom=5pt, left=10pt, right=8pt, boxsep=0pt,
+  fonttitle=\normalfont\footnotesize\ttfamily}}
+
+% V2a: macOS (circulos rojo/naranja/verde) -> codeBlockTermROG
+\tcbset{caja_terminal/.style={caja_terminal_base,
+  overlay unbroken and first={
+    \fill[red!75!black]    ([xshift=12pt,yshift=-9pt]frame.north west) circle (2.3pt);
+    \fill[orange!80!black] ([xshift=22pt,yshift=-9pt]frame.north west) circle (2.3pt);
+    \fill[green!65!black]  ([xshift=32pt,yshift=-9pt]frame.north west) circle (2.3pt);}}}
+\newtcblisting{TermROGcode}[2][caja_c_dark]{caja_terminal, listing style=#1, title={#2}}
+% V2a-2: tres circulos verdes -> codeBlockTermGGG
+\tcbset{caja_terminal_verde/.style={caja_terminal_base,
+  overlay unbroken and first={
+    \fill[green!65!black] ([xshift=12pt,yshift=-9pt]frame.north west) circle (2.3pt);
+    \fill[green!65!black] ([xshift=22pt,yshift=-9pt]frame.north west) circle (2.3pt);
+    \fill[green!65!black] ([xshift=32pt,yshift=-9pt]frame.north west) circle (2.3pt);}}}
+\newtcblisting{TermGGGcode}[2][caja_c_dark]{caja_terminal_verde, listing style=#1, title={#2}}
+
+% --- V2b: Terminal oscuro estilo GNOME/Linux -> codeBlockTermLinux ([estilo]{barra}) ---
+%   Igual que codeBlockTermROG pero con el boton [+] de Linux en vez de los circulos.
+\tcbset{caja_terminal_lnx/.style={caja_terminal_base,
+  overlay unbroken and first={
+    \fill[green!55!black, rounded corners=1.5pt]
+      ([xshift=10pt,yshift=-5pt]frame.north west) rectangle ([xshift=23pt,yshift=-13pt]frame.north west);
+    \draw[green!30!black, rounded corners=1.5pt, line width=0.3pt]
+      ([xshift=10pt,yshift=-5pt]frame.north west) rectangle ([xshift=23pt,yshift=-13pt]frame.north west);
+    \draw[white, line width=0.7pt, line cap=round]
+      ([xshift=16.5pt,yshift=-7pt]frame.north west) -- ([xshift=16.5pt,yshift=-11pt]frame.north west);
+    \draw[white, line width=0.7pt, line cap=round]
+      ([xshift=14.5pt,yshift=-9pt]frame.north west) -- ([xshift=18.5pt,yshift=-9pt]frame.north west);}}}
+\newtcblisting{TermLinuxcode}[2][caja_c_dark]{caja_terminal_lnx, listing style=#1, title={#2}}
+
+% --- V3: Pestana -> codeBlockTab ([estilo]{barra}) ---
+\tcbset{caja_tab/.style={
+  enhanced, unbreakable, listing only,
+  colback=fondocodigo, coltext=black, colframe=marco, boxrule=0.6pt,
+  arc=3pt, outer arc=3pt,
+  top=14pt, bottom=5pt, left=8pt, right=8pt, boxsep=0pt,
+  fonttitle=\normalfont\footnotesize\bfseries, coltitle=white,
+  attach boxed title to top left={xshift=8pt, yshift=-7pt},
+  boxed title style={colback=barra, colframe=barra, arc=2pt, boxrule=0pt,
+                     top=1.5pt, bottom=1.5pt, left=5pt, right=5pt}}}
+\newtcblisting{Tabcode}[2][caja_c]{caja_tab, listing style=#1, title={#2}}
+
+% --- V4: IEEE azul -> codeBlockIeee ([estilo]{barra}) ---
+\tcbset{caja_ieee/.style={estilocaja, colbacktitle=ieeeblue, colframe=ieeeblue!55}}
+\newtcblisting{Ieeecode}[2][caja_c]{caja_ieee, listing style=#1, title={#2}}
+
+
+% =====================================================================================================
+%  ESTILOS SIN BARRA SUPERIOR
+% =====================================================================================================
+
+% --- V5: Minimalista -> codeBlockMinC (SIN barra; [estilo] opcional) ---
+\tcbset{caja_min/.style={
+  enhanced, breakable, listing only,
+  colback=white, coltext=black, colframe=gray!50, boxrule=0.5pt,
+  arc=2pt, outer arc=2pt,
+  top=5pt, bottom=5pt, left=8pt, right=8pt, boxsep=0pt}}
+\newtcblisting{MinCcode}[1][caja_c]{caja_min, listing style=#1}
+
+% --- Sin decoracion -> codeBlockMinCcap | codeBlockMinSVcap | codeBlockMinBashcap (sin args) ---
+\tcbset{cajacap/.style={
+  enhanced, breakable, listing only,
+  colback=fondocodigo, colframe=marco, boxrule=0.6pt,
+  arc=3pt, outer arc=3pt,
+  top=5pt, bottom=5pt, left=8pt, right=8pt, boxsep=0pt}}
+\newtcblisting{MinCcapcode}{cajacap, listing style=caja_c}
+\newtcblisting{MinSVcapcode}{cajacap, listing style=caja_sv}
+\newtcblisting{MinBashcapcode}{cajacap, listing style=caja_bash}
