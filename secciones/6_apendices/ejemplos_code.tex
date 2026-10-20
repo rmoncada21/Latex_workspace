@@ -1,0 +1,261 @@
+% Language: LaTeX
+% =====================================================================================================
+%  ejemplos_de_code.tex  --  Una muestra de cada caja de codigo definida en listings.tex
+%  Uso (apendices):  \input{secciones/6_apendices/ejemplos_de_code}
+%  Requiere: listings.tex (cajas y float 'codigo')
+%
+%  Entorno          Argumentos             Estilo por defecto
+%  Ccode            {barra}                caja_c
+%  SVcode           {barra}                caja_sv
+%  Bashcode         {barra}                caja_bash
+%  Latcode          [estilo]{barra}        caja_c
+%  Tabcode          [estilo]{barra}        caja_c
+%  Ieeecode         [estilo]{barra}        caja_c
+%  TermROGcode      [estilo]{barra}        caja_c_dark
+%  TermGGGcode      [estilo]{barra}        caja_c_dark
+%  TermLinuxcode    [estilo]{barra}        caja_c_dark
+%  MinCcode         [estilo]               caja_c
+%  MinCcapcode / MinSVcapcode / MinBashcapcode   (sin argumentos)
+%  lstlisting       [style=codigo | codigo_sv, ...]   (formato anterior)
+%
+%  Patron de uso (el float aporta caption, label e indice):
+%    \begin{codigo}
+%    \begin{ENTORNO}[estilo]{titulo} ... \end{ENTORNO}
+%    \caption{...}
+%    \label{lst:...}
+%    \end{codigo}
+% =====================================================================================================
+\section{Ejemplos de código}
+\label{sec:ej-codigo}
+
+Este apartado muestra una caja de cada tipo definida en \texttt{listings.tex}. Las cajas solo dibujan el marco; el \texttt{\textbackslash caption}, el \texttt{\textbackslash label} y la numeración «Código X.Y» los aporta el float \texttt{codigo} que las envuelve.
+
+% =====================================================================================================
+\subsection{Barra de título: estándar}
+\label{subsec:ej-code-estandar}
+
+Barra oscura con un único argumento (el texto de la barra). Un entorno por lenguaje: \texttt{Ccode}, \texttt{SVcode} y \texttt{Bashcode}.
+
+\begin{codigo}
+\begin{Ccode}{Ccode: barra oscura, sintaxis C}
+#include <stdint.h>
+
+/* Returns the sign bit of an IEEE 754 binary32 word */
+static inline uint32_t f32_sign(uint32_t bits) {
+    return bits >> 31;   // 1 = negative
+}
+\end{Ccode}
+\caption{Ejemplo con \texttt{Ccode}.}
+\label{lst:ej-ccode}
+\end{codigo}
+
+\begin{codigo}
+\begin{SVcode}{SVcode: barra oscura, sintaxis SystemVerilog}
+module counter #(parameter int W = 8) (
+  input  logic         clk, rst_n,
+  output logic [W-1:0] count
+);
+  // Synchronous counter with active-low asynchronous reset
+  always_ff @(posedge clk or negedge rst_n)
+    if (!rst_n) count <= '0;
+    else        count <= count + 1;
+endmodule
+\end{SVcode}
+\caption{Ejemplo con \texttt{SVcode}.}
+\label{lst:ej-svcode}
+\end{codigo}
+
+\begin{codigo}
+\begin{Bashcode}{Bashcode: barra oscura, sintaxis bash}
+#!/bin/bash
+# Build and run a single test
+make clean
+make all SEED=42
+./run_sim.sh | tee sim.log   # keep a copy of the output
+\end{Bashcode}
+\caption{Ejemplo con \texttt{Bashcode}.}
+\label{lst:ej-bashcode}
+\end{codigo}
+
+% =====================================================================================================
+\subsection{Barra de título: estéticas}
+\label{subsec:ej-code-esteticas}
+
+Diseños alternativos con argumentos \texttt{[estilo]\{barra\}}. El estilo de sintaxis es opcional (por defecto C); aquí se usa el estilo por defecto en \texttt{Latcode} y se cambia en \texttt{Tabcode} y \texttt{Ieeecode}.
+
+\begin{codigo}
+\begin{Latcode}{Latcode: franja lateral azul}
+#include <stdint.h>
+
+/* Returns the sign bit of an IEEE 754 binary32 word */
+static inline uint32_t f32_sign(uint32_t bits) {
+    return bits >> 31;   // 1 = negative
+}
+\end{Latcode}
+\caption{Ejemplo con \texttt{Latcode} (estilo por defecto \texttt{caja\_c}).}
+\label{lst:ej-latcode}
+\end{codigo}
+
+\begin{codigo}
+\begin{Tabcode}[caja_sv]{Tabcode: pestaña oscura}
+module counter #(parameter int W = 8) (
+  input  logic         clk, rst_n,
+  output logic [W-1:0] count
+);
+  // Synchronous counter with active-low asynchronous reset
+  always_ff @(posedge clk or negedge rst_n)
+    if (!rst_n) count <= '0;
+    else        count <= count + 1;
+endmodule
+\end{Tabcode}
+\caption{Ejemplo con \texttt{Tabcode} y estilo \texttt{caja\_sv}.}
+\label{lst:ej-tabcode}
+\end{codigo}
+
+\begin{codigo}
+\begin{Ieeecode}[caja_bash]{Ieeecode: barra azul IEEE}
+#!/bin/bash
+# Build and run a single test
+make clean
+make all SEED=42
+./run_sim.sh | tee sim.log   # keep a copy of the output
+\end{Ieeecode}
+\caption{Ejemplo con \texttt{Ieeecode} y estilo \texttt{caja\_bash}.}
+\label{lst:ej-ieeecode}
+\end{codigo}
+
+% =====================================================================================================
+\subsection{Terminales oscuros}
+\label{subsec:ej-code-terminal}
+
+Comparten los estilos de sintaxis y reglas de fondo oscuro (\texttt{caja\_c\_dark}, \texttt{caja\_sv\_dark} y \texttt{caja\_bash\_dark}) y se diferencian solo en los botones de la barra: círculos de macOS, tres círculos verdes y botón [+] de GNOME.
+
+\begin{codigo}
+\begin{TermROGcode}[caja_bash_dark]{TermROGcode: terminal estilo macOS}
+cd build
+make clean
+make all SEED=42   # fixed seed for reproducibility
+./run_sim.sh | tee sim.log
+\end{TermROGcode}
+\caption{Ejemplo con \texttt{TermROGcode} y estilo \texttt{caja\_bash\_dark}.}
+\label{lst:ej-termrog}
+\end{codigo}
+
+\begin{codigo}
+\begin{TermGGGcode}{TermGGGcode: terminal con círculos verdes}
+#include <stdint.h>
+
+/* Returns the sign bit of an IEEE 754 binary32 word */
+static inline uint32_t f32_sign(uint32_t bits) {
+    return bits >> 31;   // 1 = negative
+}
+\end{TermGGGcode}
+\caption{Ejemplo con \texttt{TermGGGcode} (estilo por defecto \texttt{caja\_c\_dark}).}
+\label{lst:ej-termggg}
+\end{codigo}
+
+\begin{codigo}
+\begin{TermLinuxcode}[caja_sv_dark]{TermLinuxcode: terminal estilo GNOME}
+module counter #(parameter int W = 8) (
+  input  logic         clk, rst_n,
+  output logic [W-1:0] count
+);
+  // Synchronous counter with active-low asynchronous reset
+  always_ff @(posedge clk or negedge rst_n)
+    if (!rst_n) count <= '0;
+    else        count <= count + 1;
+endmodule
+\end{TermLinuxcode}
+\caption{Ejemplo con \texttt{TermLinuxcode} y estilo \texttt{caja\_sv\_dark}.}
+\label{lst:ej-termlinux}
+\end{codigo}
+
+% =====================================================================================================
+\subsection{Sin barra de título}
+\label{subsec:ej-code-sinbarra}
+
+Cajas sin barra superior. \texttt{MinCcode} es un marco fino sobre fondo blanco con estilo opcional (por defecto C); \texttt{MinCcapcode}, \texttt{MinSVcapcode} y \texttt{MinBashcapcode} no reciben argumentos y dibujan el marco sobre fondo gris.
+
+\begin{codigo}
+\begin{MinCcode}
+$#include <stdint.h>
+
+/* Returns the sign bit of an IEEE 754 binary32 word */
+static inline uint32_t f32_sign(uint32_t bits) {
+    return bits >> 31;   // 1 = negative
+}
+\end{MinCcode}
+\caption{Ejemplo con \texttt{MinCcode} (estilo por defecto \texttt{caja\_c}).}
+\label{lst:ej-minc}
+\end{codigo}
+
+\begin{codigo}
+\begin{MinCcapcode}
+#include <stdint.h>
+/* Returns the sign bit of an IEEE 754 binary32 word */
+static inline uint32_t f32_sign(uint32_t bits) {
+    return bits >> 31;   // 1 = negative
+}
+\end{MinCcapcode}
+\caption{Ejemplo con \texttt{MinCcapcode}.}
+\label{lst:ej-mincap-c}
+\end{codigo}
+
+\begin{codigo}
+\begin{MinSVcapcode}
+module counter #(parameter int W = 8) (
+  input  logic         clk, rst_n,
+  output logic [W-1:0] count
+);
+  // Synchronous counter with active-low asynchronous reset
+  always_ff @(posedge clk or negedge rst_n)
+    if (!rst_n) count <= '0;
+    else        count <= count + 1;
+endmodule
+\end{MinSVcapcode}
+\caption{Ejemplo con \texttt{MinSVcapcode}.}
+\label{lst:ej-mincap-sv}
+\end{codigo}
+
+\begin{codigo}
+\begin{MinBashcapcode}
+#!/bin/bash
+# Build and run a single test
+make clean
+make all SEED=42
+./run_sim.sh | tee sim.log   # keep a copy of the output
+\end{MinBashcapcode}
+\caption{Ejemplo con \texttt{MinBashcapcode}.}
+\label{lst:ej-mincap-bash}
+\end{codigo}
+
+% =====================================================================================================
+\subsection{Formato anterior (\texttt{lstlisting})}
+\label{subsec:ej-code-anterior}
+
+Formato independiente del float \texttt{codigo}: usa directamente \texttt{lstlisting} con los estilos \texttt{codigo} y \texttt{codigo\_sv}, y la numeración nativa de \texttt{listings}.
+
+\begin{lstlisting}[style=codigo, language=C,
+  caption={Ejemplo con el formato anterior (\texttt{style=codigo}).},
+  label=lst:ej-legacy-c]
+#include <stdint.h>
+
+/* Returns the sign bit of an IEEE 754 binary32 word */
+static inline uint32_t f32_sign(uint32_t bits) {
+    return bits >> 31;   // 1 = negative
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=codigo_sv,
+  caption={Ejemplo con el formato anterior (\texttt{style=codigo\_sv}).},
+  label=lst:ej-legacy-sv]
+module counter #(parameter int W = 8) (
+  input  logic         clk, rst_n,
+  output logic [W-1:0] count
+);
+  // Synchronous counter with active-low asynchronous reset
+  always_ff @(posedge clk or negedge rst_n)
+    if (!rst_n) count <= '0;
+    else        count <= count + 1;
+endmodule
+\end{lstlisting}

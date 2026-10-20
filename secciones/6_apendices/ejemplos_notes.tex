@@ -1,0 +1,46 @@
+% Language: LaTeX
+% =====================================================================================================
+%  ejemplos_de_notes.tex  --  Una muestra de cada tipo de nota definido en entornos.tex
+%  Uso (apendices):  \input{secciones/6_apendices/ejemplos_de_notes}
+%  Requiere: entornos.tex (float 'nota' y caja 'notaieee')
+%
+%  Tipos de nota:
+%    notaieee{Titulo}     caja IEEE SIN numerar (solo diseno)
+%    nota + notaieee      caja numerada "Nota X.Y": \caption y \label dentro del float 'nota'
+%  Indice opcional:       \listofnota
+% =====================================================================================================
+\section{Ejemplos de notas}
+\label{sec:ej-notas}
+
+Este apartado muestra una muestra de cada tipo de nota definido en \texttt{entornos.tex}. Ambas variantes comparten el mismo diseño (caja azul estilo IEEE); la diferencia es que la segunda se numera, se puede referenciar y aparece en el índice de notas.
+
+\subsection{Nota sin numerar}
+\label{subsec:ej-nota-simple}
+
+El entorno \texttt{notaieee} dibuja únicamente la caja y recibe el título como único argumento. Es adecuado para observaciones breves que no requieren referencia cruzada.
+
+\begin{notaieee}{Nota IEEE sin numerar}
+Contenido de la nota. La caja admite texto corrido, expresiones en línea como $E = mc^2$ y listas:
+\begin{itemize}
+  \item Primer punto de la nota.
+  \item Segundo punto de la nota.
+\end{itemize}
+\end{notaieee}
+
+\subsection{Nota numerada y referenciable}
+\label{subsec:ej-nota-numerada}
+
+Para numerar la nota, la caja \texttt{notaieee} se coloca dentro del float \texttt{nota}, que aporta el \texttt{\textbackslash caption} (numeración «Nota X.Y») y el \texttt{\textbackslash label} para las referencias cruzadas.
+
+\begin{nota}
+  \begin{notaieee}{Nota IEEE numerada}
+  Esta nota se numera automáticamente y se registra en el índice de notas. Puede citarse en el texto con una referencia cruzada, como se hace a continuación.
+  \end{notaieee}
+  \caption{Ejemplo de nota numerada con \texttt{nota} y \texttt{notaieee}.}
+  \label{nota:ej-numerada}
+\end{nota}
+
+Referencia cruzada a la numeración: Nota~\ref{nota:ej-numerada}.
+
+% Indice de notas (opcional; lista todas las notas numeradas del documento):
+% \listofnota
